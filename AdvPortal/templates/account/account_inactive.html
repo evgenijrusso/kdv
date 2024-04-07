@@ -1,0 +1,18 @@
+{% extends "allauth/layouts/entrance.html" %}
+{% load i18n %}
+{% load allauth %}
+
+{% block head_title %}  {% trans "Account Inactive" %}  {% endblock head_title %}
+
+{% block content %}
+<h2 style="">{% trans "Activation code" %}</h2>
+    <form action="{% url 'confirm_user' %}" method="post" style="">
+        {% csrf_token %}
+        <label>
+            <input class="text" type="text" name="code" placeholder="{ 'Enter activation code'|translate }">
+        </label>
+        <input type="submit" value="Confirm">
+    </form>
+    <p>{% trans "This account is inactive" %}</p>
+
+{% endblock content %}
