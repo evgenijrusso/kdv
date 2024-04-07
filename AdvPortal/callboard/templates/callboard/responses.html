@@ -1,0 +1,50 @@
+{% extends 'default.html' %}
+{% block title %} {{ title }} {% endblock title %}
+{% load i18n %}
+
+{% block content %}
+
+ <div class="container px-lg-3">
+    <div class="flex mt-3 mb-2">
+        <a class="btn btn-primary" href='{%url "response_create" %}' role="button">{% trans "Create response" %}</a>
+    </div>
+    <h3>{% trans "Number of responses" %}:  {{ page_obj.paginator.count }}  </h3>
+
+    {% for res in responses %}
+      <div class="mb-3">
+      <h4><b class="text-center"><a href="{% url 'response_detail' res.id %}" class="btn btn-secondary">{{ res.text|truncatechars:100 }}</a></b></h4>
+      <h5>{% trans "User" %}: {{ res.user }} </h5>
+      <h5>{% trans "Response date" %}: {{ res.response_date|date:'d M Y' }} {{res.response_date|time:"H:i"}} </h5>
+      <h5>{% trans "Accept" %} {{ res.accept }} </h5>
+      <h5>{% trans "Advert" %}: {{ res.advert }}</h5>
+      </div>
+    {% empty %}
+        <h3>{% trans "No responses!" %}</h3>
+    {% endfor %}
+
+</div>
+
+
+<!-- Добавляем пагинацию на страницу -->
+
+<div class="pagination">    <!-- Информация о предыдущих страницах -->
+   <span>
+      {% if page_obj.has_previous %}
+         <a href="?page=1">&laquo; first</a>
+         <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+      {% endif %}
+
+       <span class="current">
+         Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+
+       {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+       {% endif %}
+
+   </span>
+</div>
+
+
+{% endblock content %}

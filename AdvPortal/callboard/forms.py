@@ -29,3 +29,55 @@ class CommonSignupForm(SignupForm):
             recipient_list=[user.email]
         )
         return user
+
+
+class AdvertForm(forms.ModelForm):
+
+    # created = forms.DateTimeField(initial=datetime.utcnow(), label=(_('Created data')))
+    category = forms.CharField(
+        max_length=20, empty_value='Категория не выбрана',
+        widget=forms.Select(choices=CATEGORY)
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(AdvertForm, self).__init__(*args, **kwargs)
+
+        for visible in self.visible_fields():
+            visible.field.widget.attrs.update({'class': 'form-control'})
+
+    class Meta:
+        model = Advert
+        fields = ['user', 'title', 'category', 'content']
+        label = [_('User'), _('Title'), _('Category'),  _('Content')]
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-input', 'required': True}),
+            'content': forms.Textarea(attrs={'cols': 50, 'rows': 1}),
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        title = cleaned_data.get('title')
+        content = cleaned_data.get('content')
+        if content == title:
+            raise ValidationError(
+                'Текст не должен совпадать с заголовком.'
+            )
+
+        return cleaned_data
+
+
+class ResponseForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(ResponseForm, self).__init__(*args, **kwargs)
+
+        for visible in self.visible_fields():
+            visible.field.widget.attrs.update({'class': 'form-control'})
+
+    class Meta:
+        model = Response
+        fields = ['advert', 'user', 'text']
+        label = [_('Advert'), _('User'), _('Text'), ]
+        widgets = {
+            'text': forms.Textarea(attrs={'cols': 50, 'rows': 1, 'required': True}),
+        }

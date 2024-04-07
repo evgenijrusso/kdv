@@ -1,0 +1,52 @@
+{% extends 'default.html' %}
+{% block title %} {{ title }} {% endblock title %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="container px-lg-3">
+     <div class="flex mt-3 mb-2">
+        <a class="btn btn-primary" href='{%url "advert_create" %}' role="button">{% trans "Create Adverts" %}</a>
+    </div>
+    <h3>{% trans "Number of adverts" %}:  {{ page_obj.paginator.count }}  </h3>
+
+    {% for adv in adverts %}
+    <div class="mb-3">
+      <h4><b class="text-center"><a href="{% url 'advert_detail' adv.id %}" class="btn btn-secondary">{{ adv.title|truncatechars:100 }}</a></b></h4>
+      <h5>{% trans "User" %}: {{ adv.user }} </h5>
+      <h5>{% trans "Current date" %}: {{ adv.created|date:'d M Y'}} {{adv.created|time:"H:i"}} </h5>
+      <h5> {% trans "Category" %}: {{ adv.category }} </h5>
+      <h6>{% trans "Content" %}: {{ adv.content|truncatechars:100 }}</h6>
+      <h6>{% trans "Replies" %}: {% for field in adv.reply %} {{ field }}, {% endfor %}  {% trans "Count" %}: {{ adv.count_reply }}</h6>
+
+    </div>
+    {% empty %}
+        <h3>{% trans "No adverts!" %}</h3>
+    {% endfor %}
+
+</div>
+
+<!-- Добавляем пагинацию на страницу -->
+
+<div class="pagination">    <!-- Информация о предыдущих страницах -->
+   <span>
+      {% if page_obj.has_previous %}
+         <a href="?page=1">&laquo; first</a>
+         <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+      {% endif %}
+
+       <span class="current">
+         Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+
+       {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+       {% endif %}
+
+   </span>
+</div>
+
+
+
+{% endblock content %}

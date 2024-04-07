@@ -1,0 +1,25 @@
+{% extends 'default.html' %}
+{% block title %} {{ title }} {% endblock title %}
+
+{% load i18n %}
+
+{% block content %}
+<div class="container d-grid gap-3" style="text-align:left">
+    <div class="p-2 bg-light border">
+        <h3 class="text-center">Оставить отклик на объявление</h3>
+    </div>
+    <form action="" method="post" novalidate>
+      {% csrf_token %}
+        <div class="mb-3">
+          {% for fields in form %}
+           <div style="display:flex; flex-direction: row; justify-content: left; align-items: center">
+               <h4><label>{{ fields.label_tag }}</label></h4>
+               <h4><span>  {{ fields }} </span></h4>
+           </div>
+            {% endfor %}
+
+            <input class="btn btn-lg btn-primary" type="submit" value="save" />
+        </div>
+    </form>
+</div>
+{% endblock content %}

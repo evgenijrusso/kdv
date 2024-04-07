@@ -1,0 +1,19 @@
+{% extends 'default.html' %}
+{% load i18n %}
+
+{% block title %} {{ title }} {% endblock title %}
+
+{% block content %}
+<div class="container d-grid gap-3">
+    <div class="p-2 border">
+    <a class="btn btn-info" type="button" href="/callboard/responses/">{% trans "Back" %}</a>
+    <a class="btn btn-secondary" href="{% url 'response_update' response.pk %}" role="button">{% trans "Update response" %}</a>
+    <a class="btn btn-primary" href="{% url 'response_delete' response.pk %}" role="button">{% trans "Delete response" %}</a>
+    </div>
+    <div class="p2 border"><h3>{% trans "User" %}: {{ response.user.username }}</h3></div>
+    <div class="p2 border"><h3>{% trans "Text" %}: {{ response.text }}</h3></div>
+    <div class="p2 border"><h3>{% trans "Response date" %}: {{ response.response_date|date:'d M Y' }} {{ response.response_date|time:"H:i"}}</h3></div>
+    <div class="p2 border"><h3>{% trans "Accept" %}: {{ response.accept }} </h3></div>
+
+</div>
+{% endblock content %}

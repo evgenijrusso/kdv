@@ -138,3 +138,33 @@ STATICFILES_DIRS = [STATIC_NEWS]
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Основные настройки
+ACCOUNT_AUTHENTICATION_METHOD = 'email'  # email?  вы можете войти, выбрав имя user или адрес почты
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_LOGOUT_ON_GET = False  # Пользователь выходит из системы (требуется подтверждение)
+ACCOUNT_EMAIL_VERIFICATION = 'none'  # 'mandatory'
+ACCOUNT_FORMS = {'signup': 'callboard.forms.CommonSignupForm'}
+
+# После проверки, вошел ли пользователь в систему,
+# укажите адрес перенаправления пользователя, который не вошел в систему
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'  # profile
+LOGOUT_REDIRECT_URL = '/'  # '/accounts/login/'
+# --------- yandex ------------
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'evgenijrusso'          # os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = 'a78692c6213c9e5a03ef6c96aabcaa2a'           # os.getenv("EMAIL_HOST_PASSWORD")
+
+SERVER_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER            # os.getenv("EMAIL_HOST_USER")
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'   # для работы в консоле
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

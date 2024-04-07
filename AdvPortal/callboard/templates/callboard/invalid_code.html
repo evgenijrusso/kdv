@@ -1,0 +1,14 @@
+{% extends "default.html" %}
+{% load i18n %}
+{% block content %}
+<title>{%  trans "Account activation" %}</title>
+<div class="text-center mt-4 name" style="">
+  <h3> {%  trans "Account activation" %} </h3>
+</div>
+  <h4>{%  trans "Invalid activation code" %}</h4>
+  <form style="">
+    <input type="button" onclick="history.back();" class="btn btn-outline-secondary btn-sm"
+            value="Return to entering code">
+  </form>
+
+{% endblock %}

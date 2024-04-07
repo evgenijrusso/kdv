@@ -1,0 +1,16 @@
+{% extends 'default.html' %}
+{% load i18n %}
+
+{% block title %} Delete advert {% endblock title %}
+
+{% block content %}
+<h3 class="text-center">{% trans "Delete advert" %}</h3>
+    <br>
+    <form class="text-center" action="" method="post">
+        {% csrf_token %}
+        <p>{% trans "Are you sure you want to delete this advert?" %}</p>
+        <input class="btn btn-lg btn-dark" type="submit" value="Delete">
+         <input class="btn btn-lg btn-dark"  onclick="window.history.back()" type="button" value="Cancel" />
+    </form>
+{% endblock content %}
+

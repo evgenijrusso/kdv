@@ -1,0 +1,20 @@
+{% extends 'default.html' %}
+{% load i18n %}
+
+{% block title %} {{ title }} {% endblock title %}
+
+{% block content %}
+<div class="container d-grid gap-3">
+    <div class="p-2 border">
+    <a class="btn btn-info" type="button" href="/callboard/">{% trans "Cancel" %}</a>
+    <a class="btn btn-secondary" href="{% url 'advert_update' advert.pk %}" role="button">{% trans "Update" %}</a>
+    <a class="btn btn-primary"   href="/callboard/delete/{{ advert.pk }}" role="button">{% trans "Delete" %}</a>
+    </div>
+    <div class="p2 border"><h3>{% trans "User" %}: {{ advert.user.username }}</h3></div>
+    <div class="p2 border"><h3>{% trans "Category" %}: <strong>{{ advert.category }}</strong></h3></div>
+    <div class="p2 border"><h3>{% trans "Title" %}: {{ advert.title }}</h3></div>
+    <div class="p2 border"><h3> {% trans "Current date" %}: {{ advert.created|date:'d M Y'}} {{advert.created|time:"H:i"}}</h3></div>
+    <div class="p2 border"><h4 class="text-lg-left">{% trans "Content" %}:  {{ advert.content }}</h4></div>
+
+</div>
+{% endblock content %}
