@@ -1,0 +1,16 @@
+{% extends 'default.html' %}
+{% load i18n %}
+{% block title %} index {% endblock title %}
+
+{% block content %}
+<!--<h3>{% trans "List of adverts" %}</h3>-->
+     {{ adverts.user }}
+    {% for model in models %}
+<ul>
+   <li> <b> {{ model.user }} </b></li>
+</ul>
+
+
+    {% endfor %}
+
+{% endblock %}
