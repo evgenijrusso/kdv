@@ -1,0 +1,24 @@
+{% extends 'default.html' %}
+{% load i18n %}
+
+{% block title %}
+    Profile
+{% endblock title %}
+
+{% block content %}
+    <h2>{% trans "Your personal information is displayed here" %}</h2>
+
+    <br>
+    <h3>{% trans "Authorized user page" %} <b>{{ request.user.username }}</b></h3>
+    <br><br>
+
+    <h4>{% trans "First name" %}: <b>{{request.user.first_name}}</b></h4>
+    <h4>{% trans "Last name" %}:  <b>{{request.user.last_name}}</b></h4>
+    <h4>{% trans "Email" %}:      <b> {{user.email}}</b></h4>
+    <h4>{% trans "Nickname" %}:   <b> {{user.username}}</b></h4>
+    <hr>
+    <div class="flex mb-2">
+        <button class="btn btn-lg btn-dark"><a style="text-decoration: none; color: white" href="/">{% trans "Go out" %}</a></button>
+    </div>
+{% endblock content %}
+
