@@ -31,18 +31,18 @@ def update_advert(sender, instance, created, **kwargs):
     # post_save.connect(update_advert, sender=Advert)
 
 
-# @receiver(post_save, sender=Response)
-# def send_message(instance, created, **kwargs):
-#
-#     html_content = render_to_string('callboard/email_message.html', {'instance': instance, })
-#
-#     msg = EmailMultiAlternatives(
-#         subject=f'Отклик на пост - {instance.text}',
-#         from_email=settings.DEFAULT_FROM_EMAIL,  # instance.user.email,
-#         to=(instance.advert.user.email,)
-#     )
-#     msg.attach_alternative(html_content, "text/html")
-#     msg.send()
+@receiver(post_save, sender=Response)
+def send_message(instance, created, **kwargs):
+
+    html_content = render_to_string('callboard/email_message.html', {'instance': instance, })
+
+    msg = EmailMultiAlternatives(
+        subject=f'Отклик на пост - {instance.text}',
+        from_email=settings.DEFAULT_FROM_EMAIL,  # instance.user.email,
+        to=(instance.advert.user.email,)
+    )
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
 
 
 """  проверка в shell_plus  
