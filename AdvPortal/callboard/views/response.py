@@ -7,6 +7,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from ..models import Response, Advert
 from ..forms import ResponseForm
+from ..filter import ResponseFilter
 
 
 class ResponseList(ListView):
@@ -14,6 +15,11 @@ class ResponseList(ListView):
     template_name = 'callboard/responses.html'
     context_object_name = 'responses'
     paginate_by = 4
+
+    # def get_queryset(self):
+    #     queryset = Response.objects.filter(advert__user=self.request.user).order_by('response_date')
+    #     self.filterset = ResponseFilter(self.request.GET, queryset, request=self.request.user)
+    #     return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

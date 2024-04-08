@@ -1,7 +1,7 @@
 from django.urls import path
 from callboard.views.index import Index
 from callboard.views.confirm import ConfirmUser, UserProfileView
-from callboard.views.advert import Index, AdvertList, AdvertCreate, \
+from callboard.views.advert import AdvertList, AdvertCreate, \
     AdvertDetail, AdvertUpdate, AdvertDelete
 from callboard.views.response import ResponseList, ResponseDetail, \
     ResponseCreate, ResponseUpdate, ResponseDelete

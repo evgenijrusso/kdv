@@ -2,24 +2,23 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import render, redirect
-from django.views.generic import View, \
-    ListView, DetailView, CreateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from django.views.generic.edit import UpdateView
-from django.http.response import HttpResponse
 
-from callboard.models import Advert, User
+
+from callboard.models import Advert
 from callboard.forms import AdvertForm
 
 
-class Index(View):   # пока закомментировал (убрал контекст)
-
-    def get(self, request):
-        models = Advert.objects.all()
-        context = {
-            'models': models,
-        }
-        return HttpResponse(render(request, 'callboard/index.html', ))
-
+# class Index(View):   # пока закомментировал (убрал контекст)
+#
+#     def get(self, request):
+#         models = Advert.objects.all()
+#         context = {
+#             'models': models,
+#         }
+#         return HttpResponse(render(request, 'callboard/index.html', ))
+#
 
 class AdvertList(ListView):
     model = Advert
@@ -44,7 +43,7 @@ class AdvertDetail(DetailView):
         return context
 
 
-class AdvertCreate(CreateView):
+class AdvertCreate(LoginRequiredMixin, CreateView):
     form_class = AdvertForm
     model = Advert
     template_name = 'callboard/advert_create.html'
@@ -61,7 +60,7 @@ class AdvertCreate(CreateView):
         return context
 
 
-class AdvertUpdate(UpdateView):
+class AdvertUpdate(LoginRequiredMixin, UpdateView):
     form_class = AdvertForm
     model = Advert
     template_name = 'callboard/advert_update.html'

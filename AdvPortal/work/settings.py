@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
+    'django_extensions',
     'django_bootstrap5',
     'allauth',
     'allauth.account',
@@ -145,7 +147,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_LOGOUT_ON_GET = False  # Пользователь выходит из системы (требуется подтверждение)
-ACCOUNT_EMAIL_VERIFICATION = 'none'  # 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # `none`
 ACCOUNT_FORMS = {'signup': 'callboard.forms.CommonSignupForm'}
 
 # После проверки, вошел ли пользователь в систему,
@@ -158,8 +160,8 @@ EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'evgenijrusso'          # os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = 'a78692c6213c9e5a03ef6c96aabcaa2a'           # os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_USER = 'evgenijrusso@yandex.ru'          # os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = 'klpkvgfjupruxrbk'        # os.getenv("EMAIL_HOST_PASSWORD")
 
 SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER

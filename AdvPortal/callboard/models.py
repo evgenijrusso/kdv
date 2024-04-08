@@ -16,6 +16,7 @@ CATEGORY = [
     ('tanners', _('Tanners')), ('alchemists', _('Alchemists')), ('spell_masters', _('Spell Masters'))
 ]
 
+
 class Advert(models.Model):
     """ Объявление """
 
