@@ -4,7 +4,7 @@ from callboard.views.confirm import ConfirmUser, UserProfileView
 from callboard.views.advert import AdvertList, AdvertCreate, \
     AdvertDetail, AdvertUpdate, AdvertDelete
 from callboard.views.response import ResponseList, ResponseDetail, \
-    ResponseCreate, ResponseUpdate, ResponseDelete
+    ResponseCreate, ResponseUpdate, ResponseDelete, PrivateView, accept_response, ReplyDelete
 
 
 urlpatterns = [
@@ -21,7 +21,11 @@ urlpatterns = [
     path('callboard/responses/update/<int:pk>', ResponseUpdate.as_view(), name='response_update'),
     path('callboard/responses/delete/<int:pk>', ResponseDelete.as_view(), name='response_delete'),
 
+    path('callboard/responses/private', PrivateView.as_view(), name='private_response'),
+    path('callboard/responses/<int:pk>', accept_response, name='accept_response'),
+    path('callboard/responses/delete/<int:pk>',  ReplyDelete.as_view(), name='delete_response'),
+
     path('confirm/', ConfirmUser.as_view(), name='confirm_user'),
     path('profile/', UserProfileView.as_view(), name='profile'),
-    path('account/', Index.as_view(), name='index'),
+    path('account/', Index.as_view(), name='index')
 ]

@@ -71,6 +71,9 @@ class Response(models.Model):
     def get_absolute_url(self):
         return reverse('response_detail', kwargs={'pk': self.pk})
 
+    def date_party(self):
+        return str(self.advert)   # что бы потом убрать из строки часть даты (с конца)
+
     def status_on(self):
         self.accept = True
         self.save()

@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container d-grid gap-3">
     <div class="p-2 border">
-    <a class="btn btn-info" type="button" href="/callboard/">{% trans "Cancel" %}</a>
+    <a class="btn btn-info" type="button" href="/callboard/">{% trans "Up" %}</a>
     <a class="btn btn-secondary" href="{% url 'advert_update' advert.pk %}" role="button">{% trans "Update" %}</a>
     <a class="btn btn-primary"   href="/callboard/delete/{{ advert.pk }}" role="button">{% trans "Delete" %}</a>
     </div>

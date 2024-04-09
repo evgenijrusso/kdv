@@ -13,5 +13,5 @@ class Index(View):   # пока закомментировал (убрал ко�
         context = {
             'models': models,
         }
-        return HttpResponse(render(request, 'callboard/index.html', context))
+        return HttpResponse(render(request, 'callboard/index.html', ))
 

@@ -7,6 +7,7 @@
 </head>
 <body>
     <h2>На ваше объявление оставили отклик!!!!</h2>
-    <p> Пользователь (call) {{ instance.user.username }} оставил отклик на это объявление - {{ instance.advert.title }}</p>
+    <span>{{ instance.text }}</span>
+    <p> Пользователь "{{ instance.user.username }}" оставил отклик на это объявление - {{ instance.advert.title }}</p>
 </body>
 </html>

@@ -153,7 +153,7 @@ ACCOUNT_FORMS = {'signup': 'callboard.forms.CommonSignupForm'}
 # После проверки, вошел ли пользователь в систему,
 # укажите адрес перенаправления пользователя, который не вошел в систему
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'  # profile
+LOGIN_REDIRECT_URL = 'profile'
 LOGOUT_REDIRECT_URL = '/'  # '/accounts/login/'
 # --------- yandex ------------
 EMAIL_HOST = 'smtp.yandex.ru'

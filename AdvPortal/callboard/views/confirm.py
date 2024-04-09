@@ -27,6 +27,6 @@ class UserProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'callboard/profile.html'  # возвращаемся после авторизации
 
 
-class UserList(ListView):
-    model = User
-    queryset = User.objects.all()
+# class UserList(ListView):
+#     model = User
+#     queryset = User.objects.all()

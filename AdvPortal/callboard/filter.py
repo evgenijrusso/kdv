@@ -8,12 +8,12 @@ class ResponseFilter(FilterSet):
         lookup_expr='exact',
         label='Объявление',
         empty_label='Все объявления',
-        field_name='advert_id'
+        field_name='advert'
     )
 
     class Meta:
         model = Response
-        fields = []
+        fields = ['advert']
 
     def __init__(self, *args, **kwargs):
         super(ResponseFilter, self).__init__(*args, **kwargs)

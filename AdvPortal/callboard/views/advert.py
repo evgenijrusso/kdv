@@ -1,24 +1,11 @@
 from django.contrib import messages
-from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from django.views.generic.edit import UpdateView
-
 
 from callboard.models import Advert
 from callboard.forms import AdvertForm
 
-
-# class Index(View):   # пока закомментировал (убрал контекст)
-#
-#     def get(self, request):
-#         models = Advert.objects.all()
-#         context = {
-#             'models': models,
-#         }
-#         return HttpResponse(render(request, 'callboard/index.html', ))
-#
 
 class AdvertList(ListView):
     model = Advert
@@ -74,9 +61,9 @@ class AdvertUpdate(LoginRequiredMixin, UpdateView):
         return super(AdvertUpdate, self).form_valid(form)
 
 
-class AdvertDelete(DeleteView):  # PermissionRequiredMixin,
-#    permission_required = 'callboard.advert_delete'
-#    permission_denied_message = "Permission Denied"
+class AdvertDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = 'callboard.advert_delete'
+    permission_denied_message = "Permission Denied"
     model = Advert
     template_name = 'callboard/advert_delete.html'
     context_object_name = 'advert'

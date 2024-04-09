@@ -16,7 +16,7 @@
       <h5>{% trans "User" %}: {{ res.user }} </h5>
       <h5>{% trans "Response date" %}: {{ res.response_date|date:'d M Y' }} {{res.response_date|time:"H:i"}} </h5>
       <h5>{% trans "Accept" %} {{ res.accept }} </h5>
-      <h5>{% trans "Advert" %}: {{ res.advert }}</h5>
+      <h5>{% trans "Advert" %}: {{ res.date_party|slice:":-16"}}</h5>
       </div>
     {% empty %}
         <h3>{% trans "No responses!" %}</h3>

@@ -3,10 +3,10 @@ from django.dispatch import receiver
 # from django.shortcuts import redirect
 
 from .models import Response, Advert
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives, EmailMessage, get_connection
 from django.conf import settings
 from django.template.loader import render_to_string
-from django.core.mail import send_mail
+# from django.core.mail import send_mail
 
 """ post_save запускает действие всякий раз, когда 
     пользователь сохраняет какой-либо объект в базе данных
@@ -15,20 +15,12 @@ from django.core.mail import send_mail
 """
 
 
-# @receiver(post_save, sender=Advert)
-# def create_advert(sender, instance, created, **kwargs):
-#     if created:
-#         print(f'New instance created: {instance.title} {instance.created.strftime("%Y-%M-%d")}')
-#     else:
-#         print(f' Instance updated: {instance.title} {instance.created.strftime("%Y-%M-%d")}')
-
-
 @receiver(post_save, sender=Advert)
 def update_advert(sender, instance, created, **kwargs):
     print(f'New instance created: {instance}')
-    # if not created:
-    #     print(f'New instance created: {instance.title}')
-    # post_save.connect(update_advert, sender=Advert)
+    if not created:
+        print(f'New instance created: {instance.title}')
+    post_save.connect(update_advert, sender=Advert)
 
 
 @receiver(post_save, sender=Response)
@@ -43,6 +35,7 @@ def send_message(instance, created, **kwargs):
     )
     msg.attach_alternative(html_content, "text/html")
     msg.send()
+
 
 
 """  проверка в shell_plus  

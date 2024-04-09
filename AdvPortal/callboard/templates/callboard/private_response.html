@@ -1,0 +1,59 @@
+{% extends 'default.html' %}
+{% load i18n %}
+
+{% block title %}
+    Private page
+{% endblock title %}
+
+{% block content %}
+    <h2>Отклики по объявлениям, всего: {{ page_obj.paginator.count }}</h2>
+    <br>
+    <form action="" method="get">
+        <h5>{{ filterset.form.as_p }}</h5>
+        <button class="btn btn-secondary" type="submit">Выбрать нужное объявление пользователя</button>
+    </form>
+            {% for response in page_obj %}
+            <br>
+            <h4><a class="nav-link" href="/callboard/{{ response.advert.id }}"> Объявление: {{ response.advert.title}}</a></h4>
+            <h5>Response(text): {{ response.text }}</h5>
+            <table width="100%">
+                <tr>
+                    <td width="200">
+                        <div>Date: {{ response.response_date|date:'d M Y' }}</div>
+                        <div>User: {{ response.user }}</div>
+                        <div>Accept: {{ response.accept }}</div>
+                    </td>
+                    <td align="left">
+                        {% if response.accepted %}
+                        <p>Отклик принят</p>
+                        {% else %}
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <a style="text-decoration: none" href="{% url 'accept_response' response.id %}">
+                                <input id="acceptButton" class="btn btn-info" type="button" value="Принять" />
+                            </a>
+                            <a style="text-decoration: none" href="/callboard/responses/delete/{{ response.pk }}">
+                                <input id="deleteButton" class="btn btn-primary"
+                                       type="button" value="Удалить" />
+                            </a>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+
+            </table>
+    {% empty %}
+        <h3>Responses empty.</h3>
+    {% endfor %}
+
+<script>
+const submitBtn = document.getElementById("acceptButton");
+submitBtn.addEventListener('click', function() {
+  submitBtn.disabled = true;
+});
+
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+{% endblock content %}
