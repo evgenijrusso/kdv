@@ -1,13 +1,13 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse, reverse_lazy
+from django.shortcuts import redirect
+
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from ..models import Response, Advert
+from ..models import Response
 from ..forms import ResponseForm
 from ..filter import ResponseFilter
 
@@ -63,20 +63,10 @@ class ResponseUpdate(LoginRequiredMixin, UpdateView):
         return super(ResponseUpdate, self).form_valid(form)
 
 
-class ResponseDelete(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
-    permission_required = 'callboard.advert_delete'
-    permission_denied_message = "Permission Denied"
+class ResponseDelete(LoginRequiredMixin, DeleteView):
     model = Response
     template_name = 'callboard/response_delete.html'
     success_url = '/callboard/responses/'
-
-    # def form_valid(self, form):
-    #     if self.request.user == self.object.user or self.request.user == self.object.advert.user:
-    #         success_url = '/callboard/responses/'
-    #         self.object.delete()
-    #         return HttpResponseRedirect(success_url)
-    #     else:
-    #         return self.handle_no_permission()
 
 
 class ReplyDelete(LoginRequiredMixin, DeleteView):

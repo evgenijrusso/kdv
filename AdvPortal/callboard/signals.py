@@ -31,7 +31,7 @@ def send_message(instance, created, **kwargs):
     msg = EmailMultiAlternatives(
         subject=f'Отклик на пост - {instance.text}',
         from_email=settings.DEFAULT_FROM_EMAIL,  # instance.user.email,
-        to=(instance.advert.user.email,)
+        to=(instance.user.email,)
     )
     msg.attach_alternative(html_content, "text/html")
     msg.send()
